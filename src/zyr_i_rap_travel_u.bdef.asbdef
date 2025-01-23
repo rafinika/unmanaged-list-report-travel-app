@@ -1,0 +1,66 @@
+unmanaged; //implementation in class zbp_yr_i_rap_travel_u unique;
+//strict ( 2 );
+
+define behavior for ZYR_I_RAP_TRAVEL_U alias Travel
+implementation in class zbp_yr_i_rap_travel_u unique
+//late numbering
+lock master
+//authorization master ( instance )
+etag master Lastchangedat
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly ) TravelId;
+  field (mandatory) AgencyId, CustomerId, BeginDate, EndDate;
+
+  association _Booking { create; }
+
+  mapping for /DMO/TRAVEL control zyrsrap_travel_x
+  {
+    TravelId = travel_id;
+    AgencyId = AGENCY_ID;
+    CustomerId = CUSTOMER_ID;
+    BeginDate = BEGIN_DATE;
+    EndDate = END_DATE;
+    BookingFee = BOOKING_FEE;
+    TotalPrice = TOTAL_PRICE;
+    CurrencyCode = CURRENCY_CODE;
+    Description = DESCRIPTION;
+    Status = STATUS;
+    Createdby = CREATEDBY;
+    Createdat = CREATEDAT;
+    Lastchangedby = LASTCHANGEDBY;
+    Lastchangedat = LASTCHANGEDAT;
+  }
+}
+
+define behavior for ZYR_I_RAP_BOOKING_U alias Booking
+implementation in class zbp_yr_i_rap_booking_u unique
+//late numbering
+lock dependent by _Travel
+//authorization dependent by _Travel
+etag dependent by _Travel
+{
+  update;
+  delete;
+
+  field ( readonly ) TravelId, BookingId;
+  field (mandatory) BookingDate, CustomerID, CarrierId, ConnectionID, FlightDate;
+  association _Travel;
+
+  mapping for /DMO/BOOKING control zyrsrap_booking_x
+  {
+    TravelId = TRAVEL_ID;
+    BookingId = BOOKING_ID;
+    BookingDate = BOOKING_DATE;
+    CustomerId = CUSTOMER_ID;
+    CarrierId = CARRIER_ID;
+    ConnectionId = CONNECTION_ID;
+    FlightDate = FLIGHT_DATE;
+    FlightPrice = FLIGHT_PRICE;
+    CurrencyCode = CURRENCY_CODE;
+  }
+
+}
