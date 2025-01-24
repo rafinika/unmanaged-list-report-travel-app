@@ -1,4 +1,4 @@
-@AccessControl.authorizationCheck: #NOT_REQUIRED
+@AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Booking BO projection view'
 @Search.searchable: true
 @Metadata.allowExtensions: true

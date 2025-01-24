@@ -1,0 +1,12 @@
+@EndUserText.label: 'Travel Serv. Def'
+define service ZYR_UI_RAP_TRAVEL_U {
+  expose ZYR_C_RAP_TRAVEL_U  as Travel;
+  expose ZYR_C_RAP_BOOKING_U as Booking;
+  expose /DMO/I_Customer     as Passenger;
+  expose /DMO/I_Agency       as TravelAgency;
+  expose /DMO/I_Carrier      as Airline;
+  expose /DMO/I_Flight       as Flight;
+  expose /DMO/I_Connection   as Connection;
+  expose /DMO/I_Airport      as Airport;
+  expose I_Currency          as Currency;
+}
